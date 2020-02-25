@@ -36,7 +36,7 @@
 	0xff156;
 	num.toExponential(n); // 2.345e+3 а при n = 4 будет 2.3450e+3;
 	num.toPrecision(n); // В общем случае из 2345 будет 2345, при n = 2 будет 2.3e+3;
-	num.toString(8)
+	num.toString(8) // представляет число в 8ой системе исчисления
 	56e-6;
 	Math.pow(n, s);
 	Math.sqrt(n);
@@ -81,9 +81,9 @@
 	arr.unshift(elem, elem2);
 	arr.reverse();
 	arr.fill(value); // fill all array with the value;
-	prompt('q', 'a');
+	prompt('q', 'default value'); // return answer or null
 	alert('text');
-	confirm('text');
+	confirm('text'); // return true or false
 	for(var key in obj);
 	parseInt(str, 16);
 	parseFloat(str, 2);
@@ -127,7 +127,14 @@
 			walk(){console.log(super.walk)} // keyword 'super'return prop from prototype and the keyword work only in method of obj
 		} // and work only with [[HomeObject]]
 	}
-	typeof NaN;
+	typeof NaN //'number'
+	typeof undefined // "undefined"
+	typeof 0 // "number"
+	typeof true // "boolean"
+	typeof "foo" // "string"
+	typeof {} // "object"
+	typeof null // "object" (1)
+	typeof function(){} // "function" (2)
 	perfomance.now(); // how much milliseconds has been left from browser send request to erver for open page
 	console.time('name');
 	console.timeEnd('name');
