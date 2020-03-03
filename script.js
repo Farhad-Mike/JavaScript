@@ -1,5 +1,4 @@
-age = +prompt('Age')
+'use strict'
 
-if (age <= 90 && age >= 14){
-    alert('Access granted')
-}
+
+multiplyNumeric(salaries)
