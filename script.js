@@ -2,3 +2,7 @@
 
 let obj = {};
 
+'use strict'
+
+
+multiplyNumeric(salaries)
