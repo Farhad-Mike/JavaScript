@@ -58,6 +58,7 @@
 	Math.log(5);
 	Math.exp(6);
 	Math.abs(num);
+	Math.trunc('2.2') // remove .2 and return number 2
 	arr.length;
 	arr.indexOf(elem);
 	arr.slice(a, b);
@@ -410,13 +411,17 @@ alert( user.firstName ); // Гость
 	elem.ownerDocument; // always return the higest node of the elem. For DOM elem will return document;
 	// if use enter for submit, automatic will used event click;
 	let sym = Symbol();
-	let sym = Symbol('name');
+	let sym = Symbol('name'); // Если создать таким образом символ то он в глобальный реестр не попадет
 	let sym = Symbol.for('name'); // add to Global Registry; 'name' is a name of the symbol; symbol is a sym or Symbol(); Добавление и чтение из реестра;
 	Symbol.keyFor(sym); // return name of sym ('name');
 	for(let value of obj){}; // Как и цикл for..in.. только перебирает нумерованные объекты;
 	for(let value of 'str');
 	obj[Symbol.iterator] = function(){let a; let b; return{next(){if(___){return {done:false, value: n++}}else{return{done:true}}}}} // set iterator function. Если this.to == infinity то цикл будет бесконечно;
 	// Если у объекта уже есть или задать отдельно метод next(), то тело символа Symbol.iterator должно вернуть return this;
+	sym.toString() // Return 'Symbol("name")'
+	sym.descriptor // Return 'name'
+
+
 
 	let map = new Map();
 	map
@@ -753,3 +758,10 @@ window.clientWidth / window.clientHeight // return all empty width / height with
 window.innerWidth / window.innerHeight // return all empty width / height with scroll bar
 
 /**/
+
+
+let bigİnt = 1535435n // Создать числовой тип данных BigInt
+2 ** 3 // return 8
+
+obj[Symbol.toPrimitive]('string') // obj.toString() then obj.valueOf()
+obj[Symbol.toPrimitive]('number'/'default') // obj.valueOf() then obj.toString()
