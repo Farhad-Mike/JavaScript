@@ -183,3 +183,42 @@ let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 Особый вариант использования: setTimeout(func, 0) или просто setTimeout(func).
 func.call(context, arg1, arg2, ...)
 func.apply(context, args) Он выполняет func, устанавливая this=context и принимая в качестве списка аргументов псевдомассив args.
+Метод Object.getOwnPropertyDescriptor позволяет получить полную информацию о свойстве.
+Object.defineProperty(obj, prop, descriptor);
+
+let obj = {
+  get propName() {
+    // геттер, срабатывает при чтении obj.propName
+  },
+  set propName(value) {
+    // сеттер, срабатывает при записи obj.propName = value
+  }
+};
+
+Object.defineProperty(user, 'fullName', {
+  get() {
+    return `${this.name} ${this.surname}`;
+  },
+
+  set(value) {
+    [this.name, this.surname] = value.split(" ");
+  }
+});
+
+Цикл for..in проходит не только по собственным, но и по унаследованным свойствам объекта.
+Object.keys возвращает только собственные ключи
+obj.hasOwnProperty(key): он возвращает true, если у obj есть собственное, не унаследованное, свойство с именем key.
+Если в F.prototype содержится объект, оператор new устанавливает его в качестве [[Prototype]] для нового объекта.
+После создания F.prototype может измениться, и новые объекты, созданные с помощью new F(), будут иметь другой объект в качестве [[Prototype]], но уже существующие объекты сохранят старый.
+Rabbit.prototype = { constructor: Rabbit };
+Современные же методы это:
+    Object.create(proto, [descriptors]) – создаёт пустой объект со свойством [[Prototype]], указанным как proto, и необязательными дескрипторами свойств descriptors.
+    Object.getPrototypeOf(obj) – возвращает свойство [[Prototype]] объекта obj.
+    Object.setPrototypeOf(obj, proto) – устанавливает свойство [[Prototype]] объекта obj как proto.
+Теперь, если мы хотим использовать объект как ассоциативный массив, мы можем сделать это с помощью небольшого трюка:
+let obj = Object.create(null);
+let key = prompt("What's the key?", "__proto__");
+obj[key] = "some value";
+alert(obj[key]); // "some value"
+
+Как и в литеральных объектах, в классах можно объявлять вычисляемые свойства, геттеры/сеттеры и т.д.
