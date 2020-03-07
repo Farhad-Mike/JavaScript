@@ -319,3 +319,47 @@ fetch('/article/promise-chaining/user.json')
 fetch('/article/promise-chaining/user.json')
   .then(response => response.json())
   .then(user => alert(user.name)); // iliakan, получили имя пользователя
+
+  В браузере мы можем поймать такие ошибки, используя событие unhandledrejection глобальный обработчик если промис не перехватил ошибку window.addEventListener('unhandledrejection', func)
+
+  let promise = Promise.all([...промисы...]); (может принимать любой перебираемый объект, но обычно используется массив) Новый промис завершится, когда завершится весь переданный список промисов, и его результатом будет массив их результатов. 
+  Обратите внимание, что порядок элементов массива в точности соответствует порядку исходных промисов. 
+
+let urls = [
+  'https://api.github.com/users/iliakan',
+  'https://api.github.com/users/remy',
+  'https://api.github.com/users/jeresig'
+];
+// Преобразуем каждый URL в промис, возвращённый fetch
+let requests = urls.map(url => fetch(url));
+// Promise.all будет ожидать выполнения всех промисов
+Promise.all(requests)
+  .then(responses => responses.forEach(
+    response => alert(`${response.url}: ${response.status}`)
+  ));
+
+  Обычно, Promise.all(...) принимает перебираемый объект промисов (чаще всего массив). Но если любой из этих объектов не является промисом, он передаётся в итоговый массив «как есть».
+
+  Метод Promise.allSettled всегда ждёт завершения всех промисов. В массиве результатов будет
+    {status:"fulfilled", value:результат} для успешных завершений,
+    {status:"rejected", reason:ошибка} для ошибок.
+
+Метод очень похож на Promise.all, но ждёт только первый промис, из которого берёт результат (или ошибку).
+let promise = Promise.race(iterable);
+
+
+Методы Promise.resolve и Promise.reject редко используются в современном коде, так как синтаксис async/await (мы рассмотрим его чуть позже) делает его, в общем-то, не нужным.
+Promise.resolve(value) создаёт успешно выполненный промис с результатом value.
+Promise.reject(error) создаёт промис, завершённый с ошибкой error
+
+Промисификация:
+let loadScriptPromise = function(src) {
+  return new Promise((resolve, reject) => {
+    loadScript(src, (err, script) => {
+      if (err) reject(err)
+      else resolve(script);
+    });
+  })
+}
+// использование:
+// loadScriptPromise('path/script.js').then(...)
