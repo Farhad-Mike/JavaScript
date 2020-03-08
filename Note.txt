@@ -363,3 +363,12 @@ let loadScriptPromise = function(src) {
 }
 // использование:
 // loadScriptPromise('path/script.js').then(...)
+
+function* range(start, end) {
+  for (let i = start; i < end; i++) yield i;
+}
+
+Для генераторов есть особый синтаксис yield*, который позволяет «вкладывать» генераторы один в другой (осуществлять их композицию).
+let generator = gen();
+let question = generator.next().value;
+generator.throw(new Error("Ответ не найден в моей базе данных")); // (2)
