@@ -597,5 +597,26 @@ text.data Из узла читать содержимое
 text.nodeValue Из узла читать содержимое
 news.textContent Предоставляет доступ к тексту внутри элемента за вычетом всех <тегов>
 <div hidden>С атрибутом "hidden"</div>
- elem.hidden = true;
- value – значение для <input>, <select> и <textarea>
+elem.hidden = true;
+value – значение для <input>, <select> и <textarea>
+elem.hasAttribute(name) – проверяет наличие атрибута.
+elem.getAttribute(name) – получает значение атрибута.
+elem.setAttribute(name, value) – устанавливает значение атрибута.
+elem.removeAttribute(name) – удаляет атрибут.
+elem.attributes получить все атрибуты элемента {name: attrName, value: attrValue}
+Когда стандартный атрибут изменяется, соответствующее свойство автоматически обновляется. Это работает и в обратную сторону (за некоторыми исключениями).  эта «особенность» может пригодиться, потому что действия пользователя могут приводить к изменениям value, и если после этого мы захотим восстановить «оригинальное» значение из HTML, оно будет в атрибуте.
+DOM-свойства не всегда являются строками. 
+alert(input.getAttribute('checked')); // значение атрибута: пустая строка
+alert(input.checked); // значение свойства: true
+<body data-about="Elephants"> / document.body.dataset.about
+data-order-state / dataset.orderState
+
+Методы classList:
+    elem.classList.add/remove("class") – добавить/удалить класс.
+    elem.classList.toggle("class") – добавить класс, если его нет, иначе удалить.
+    elem.classList.contains("class") – проверка наличия класса, возвращает true/false.
+
+Свойство elem.style – это объект, который соответствует тому, что написано в атрибуте "style". Для свойства из нескольких слов используется camelCase.  дефис означает заглавную букву.
+div.style.cssText Это свойство редко используется, потому что такое присваивание удаляет все существующие стили.
+getComputedStyle(element, [pseudo]) возвращает окончательное значение свойства. При обращении к сокращённому: padding, margin, border – правильный результат не гарантируется.
+Посещённые ссылки могут быть окрашены с помощью псевдокласса :visited. getComputedStyle не даёт доступ к этой информации
