@@ -624,3 +624,10 @@ data-order-state / dataset.orderState
 div.style.cssText Это свойство редко используется, потому что такое присваивание удаляет все существующие стили.
 getComputedStyle(element, [pseudo]) возвращает окончательное значение свойства. При обращении к сокращённому: padding, margin, border – правильный результат не гарантируется.
 Посещённые ссылки могут быть окрашены с помощью псевдокласса :visited. getComputedStyle не даёт доступ к этой информации
+
+/*  REACT JS  */
+
+Метод componentDidMount(){} запускается после того, как компонент отрендерился.
+componentWillUnmount(){} запускается при удалении компонента
+Устаревший и не применяемый методы componentWillReceiveProps(nextProps){}, componentWillMount(){}, componentWillUpdate(){}
+shouldComponentUpdate(nextProps, nextState){} Затратный метод. Если вернет true то компонентр обновиться, если false то нет.
