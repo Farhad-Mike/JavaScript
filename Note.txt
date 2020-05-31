@@ -4,6 +4,7 @@ npm install -g win-node-env
 Or you may include it in your project's or your library's optional dependencies:
 npm install --save-optional win-node-env
 It won't install on any other OS than Windows.
+html-loader (for images)
 
 Все матиматический операции кроме бинарного плюса вызывают численное преобразование.
 Если для преобразования нету метода obj[Symbol.toPrimitive]() то используется obj.toString()/obj.valueOf() если hint == 'string' или obj.valueOf()/obj.toString() если hint == 'number'/'default'
@@ -61,6 +62,9 @@ map.set("1", "str1")
 map.forEach(function(value, key, map) {});
 Object.entries(obj), который получает объект и возвращает массив пар ключ-значение. [ ["name","John"], ["age", 30] ]
 Есть метод Object.fromEntries, который делает противоположное: получив массив пар вида [ключ, значение], он создаёт из них объект. Object.fromEntries ожидает перебираемый объект в качестве аргумента, не обязательно массив. 
+
+
+Math.trunc(3.6) // Просто удаляет дробную часть без округления
 
 
 Объект Set – это особый вид коллекции: «множество» значений (без ключей), где каждое значение может появляться только один раз.
