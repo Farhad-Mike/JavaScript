@@ -103,6 +103,9 @@
 	Object.defineProperty(obj, 'prop', descriptor);
 	Object.defineProperties(obj, descriptor);
 	Object.keys(obj); // return array from prop of obj;
+	Object.values(obj); // return array from values of obj;
+	Object.entries(obj); // Создает массив с подмассивами пары [key, value]
+	Object.getOwnPropertySymbols(obj); // return array for all symbols in the obj;
 	Object.preventExtensions(obj); // I can't add new prop to the obj;
 	Object.isExtensible(obj);
 	Object.seal(obj); // Object.preventExtensions() + configurable = false;
@@ -114,8 +117,8 @@
 	Object.assign(target, src, src2, src3, . . . .); // Copy all prop from src$ to target, and rewrite latest prop from latest src;
 	Object.assigh({}, obj); // will clone obj;
 	Object.is(value1, value2); // will compare and return true/false; have some difference neither main compare(===);
-	Object.getOwnPropertySymbols(obj); // return all symbols in the obj;
 	Object.getOwnPropertyNames(obj);
+	Object.fromEntries(arr) // Делает противоположное Object.entries(). получив массив с подмассивами [key, value], превращает их в объект
 	obj.hasOwnProperty('prop');
 	obj.isEnumerable('prop');
 	obj.isPrototypeOf(obj2); // is obj2 has been prototyped from obj? return true/false;
@@ -464,7 +467,7 @@ alert( user.firstName ); // Гость
 	weakMap.get(obj-key);
 	weakMap.has(obj-key);
 
-	let weakSet = new WeakSet(); // everything work like for WeakMap constructor;
+	let weakSet = new WeakSet(); // everything work like for WeakMap constructor; but do not have weakSet.has(obj);
 
 
 	// Book 3;
