@@ -20,7 +20,7 @@
 	str.split(', ', 3); // second arguments show how much length must be argument, other string will be deleted
 	str.trim();
 	str.replace('str', str2/func);
-	str.includes(str2);
+	str.includes(str2, pos);
 	str.repeat(n);
 	str.endsWith(str2); // true/false if ends with str2;
 	str.startsWith(str2);
@@ -60,21 +60,23 @@
 	Math.abs(num);
 	Math.trunc('2.2') // remove .2 and return number 2
 	arr.length;
-	arr.indexOf(elem);
+	arr.indexOf(elem, pos);
+	arr.lastIndexOf(elem, pos);
+	arr.includes(elem, pos);
 	arr.slice(a, b);
 	arr.splice(a, n, add, add2);
 	arr.concat(arr2, arr3, elem);
 	arr.flat(level); // argument level set how much multidimentional is;
 	arr.sort(func);
-	arr.forEach(callBack(item, i, arr){}, context);
-	arr.filter(callBack(item, i, arr){}, context);
+	arr.forEach(callBack(item, i, arr){}, context); // Контекст в данном случае указывает, откуда всязть callBack функцию. То есть контекст не для самого массива, а для метода. То есть сам метод может ссылаться к каким либо данным внутри своего объекта
+	arr.filter(callBack(item, i, arr){}, context); // Тоже самое что и arr.find(), только возвращает все элементы для которых возвращается true
 	arr.map(callBack(item, i, arr){}, context);
 	arr.every(callBack(){}, context);
 	arr.some(callBack(){}, context);
 	arr.reduce(callBack(previousValue, currentItem, index, arr){}, initialValue);
 	arr.reduceRight(callBack(previousValue, currentItem, index, arr){}, initialValue);
-	arr.find(callBack(item, i, arr){}, context);
-	arr.findIndex(callBack(item, i, arr){}, context);
+	arr.find(callBack(item, i, arr){}, context); // Если функция возвращает true, поиск прерывается и возвращается item. Если ничего не найдено, возвращается undefined. В отличие от arr.some() возвращает сам элемент а не булево значение
+	arr.findIndex(callBack(item, i, arr){}, context);  // по сути, то же самое что arr.find(), но возвращает индекс, на котором был найден элемент, а не сам элемент, и -1, если ничего не найдено
 	arr.join(':');
 	arr.pop();
 	arr.push(elem, elem2);
@@ -82,6 +84,8 @@
 	arr.unshift(elem, elem2);
 	arr.reverse();
 	arr.fill(value); // fill all array with the value;
+	Array.isArray(value) // Он возвращает true, если value массив, и false, если нет
+	Array.from(value, callBack, thisArg) // который принимает итерируемый объект или псевдомассив и делает из него «настоящий» Array. Второй аргумент может быть функцией, которая будет применена к каждому элементу перед добавлением в массив
 	prompt('q', 'default value'); // return answer or null
 	alert('text');
 	confirm('text'); // return true or false
