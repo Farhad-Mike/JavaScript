@@ -119,7 +119,7 @@
 	Object.is(value1, value2); // will compare and return true/false; have some difference neither main compare(===);
 	Object.getOwnPropertyNames(obj);
 	Object.fromEntries(arr) // Делает противоположное Object.entries(). получив массив с подмассивами [key, value], превращает их в объект
-	obj.hasOwnProperty('prop');
+	obj.hasOwnProperty('prop'); // Если унаследованные свойства нам не нужны, то мы можем отфильтровать их при помощи встроенного метода
 	obj.isEnumerable('prop');
 	obj.isPrototypeOf(obj2); // is obj2 has been prototyped from obj? return true/false;
 	obj instanceof Class;
@@ -479,7 +479,7 @@ alert( user.firstName ); // Гость
 	});
 	customElement.get(customeTag); // return constructor WordCount which has been used for create element.
 
-	let proto = Object.create(proto);
+	let proto = Object.create(proto[, descriptors]); // Создать объект используя прототим и дескриптор свойств.
 	proto.constructor = func;
 	proto.connectedCallback = func;
 	proto.disconnectedCallback = func;
