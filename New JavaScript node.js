@@ -28,7 +28,7 @@
 	'\u2033';
 	'\u{20331}'; maximum 8 numbers but can be a lower;
 	JSON.parse('obj', func);
-	JSON.stringfy(obj, func, space);
+	JSON.stringfy(obj, callback(key, value), space); // callback должна возвращать уже измененное значение или undefined чтобы пропустить. Первый вызов – особенный. Ему передаётся специальный «объект-обёртка»: {"": meetup}. Другими словами, первая (key, value) пара имеет пустой ключ, а значением является целевой объект в общем. Вместо функции можно передать массив свойств которые будут обработаны автоматически
 	num.toLocaleString();
 	num.toFixed(2);
 	+'481320';
