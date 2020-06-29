@@ -772,3 +772,7 @@ let bigİnt = 1535435n // Создать числовой тип данных Bi
 
 obj[Symbol.toPrimitive]('string') // obj.toString() then obj.valueOf()
 obj[Symbol.toPrimitive]('number'/'default') // obj.valueOf() then obj.toString()
+
+func.name // Return name of the function
+func.length // содержит количество параметров функции в её объявлении. троеточие, обозначающее остаточные параметры не считается
+func.bind(context, ...args) // Привязка контекста
