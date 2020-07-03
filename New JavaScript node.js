@@ -721,6 +721,11 @@ const unsigned short CLOSED = 2; // соединение закрыто
 					 promise.then(func)
 	*/
 
+	Promise.allSettled(iterable) 	// всегда ждёт завершения всех промисов. Для каждого промиса вернет {status:"fulfilled", value:результат} для успешных завершений,  {status:"rejected", reason:ошибка} для ошибок.
+	Promise.all(iterable) 			// но ждёт только первый промис, из которого берёт результат (или ошибку).
+	Promise.resolve(value) 			// создаёт успешно выполненный промис с результатом value
+	Promise.reject(error) 			// создаёт промис, завершённый с ошибкой error
+
 	function* name(){
 		yield value;
 		let result = yield value;
