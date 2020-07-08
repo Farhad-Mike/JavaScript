@@ -754,6 +754,11 @@ const unsigned short CLOSED = 2; // соединение закрыто
 
 	*/
 
+	let {proxy, revoke} = Proxy.revocable(target, handlers); // Отключаемый прокси. Вызов revoke() удалит все ссылки и выключит proxy
+
+	Reflect.get(obj, prop, receiver); // Use inside new Proxy. Для прамого и короткого доступа на оригинальный объект. Читай документацию и о дополнительных свойствах
+	Reflect.set(obj, prop, value, receiver); // Use inside new Proxy. Для прамого и короткого доступа на оригинальный объект. Читай документацию и о дополнительных свойствах
+
 	let range = document.createRange();
 	range.setStart(textNode, offsetPoint);
 	range.setEnd(textNode, offsetPoint); // use toString() method for convert to a string;
