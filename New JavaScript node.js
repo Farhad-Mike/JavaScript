@@ -777,7 +777,8 @@ window.innerWidth / window.innerHeight // return all empty width / height with s
 /**/
 
 
-let bigİnt = 1535435n // Создать числовой тип данных BigInt
+let bigInt = 1535435n // Создать числовой тип данных 
+let bigInt = BigInt(124342) // принимает строки и числа
 2 ** 3 // return 8
 
 obj[Symbol.toPrimitive]('string') // obj.toString() then obj.valueOf()
