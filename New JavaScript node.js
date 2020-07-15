@@ -709,7 +709,6 @@ let promise = new Promise(function (resolve, reject) {
 		// reject(ошибка) при ошибке
 	)}
 
-<<<<<<< HEAD
 promise.then(onFulfilled, onRejected); // Можно назначить как оба обработчика сразу, так и только один promise.then(onFulfilled), promise.then(null, onRejected);
 promise.catch(onRejected); // Поставить обработчик только на ошибку; Он может стоять в любом месте асинхронного promise.
 new Promise(function (resolve, reject) {
@@ -776,64 +775,6 @@ range.setEnd(textNode, offsetPoint); // use toString() method for convert to a s
 
 getSelection(); // return object from mouse selected txt;
 getSelection().removeAll(); // remove all selection;
-=======
-	promise.then(onFulfilled, onRejected); // Можно назначить как оба обработчика сразу, так и только один promise.then(onFulfilled), promise.then(null, onRejected);
-	promise.catch(onRejected); // Поставить обработчик только на ошибку; Он может стоять в любом месте асинхронного promise.
-	new Promise(function(resolve, reject){
-	  // то же что reject(new Error("o_O"))
-	  throw new Error("o_O");
-	})
-	Promise.all(iterable);// Получает массив (или другой итерируемый объект) промисов и возвращает промис, который ждёт, пока все переданные промисы завершатся.
-	return к then, catch к catch;
-	/* Если записать promise.then(func) то выполнится два promis-a;
-					 promise.then(func)
-	*/
-
-	Promise.allSettled(iterable) 	// всегда ждёт завершения всех промисов. Для каждого промиса вернет {status:"fulfilled", value:результат} для успешных завершений,  {status:"rejected", reason:ошибка} для ошибок.
-	Promise.all(iterable) 			// но ждёт только первый промис, из которого берёт результат (или ошибку).
-	Promise.resolve(value) 			// создаёт успешно выполненный промис с результатом value
-	Promise.reject(error) 			// создаёт промис, завершённый с ошибкой error
-
-	function* name(){
-		yield value;
-		let result = yield value;
-		yield* anotherGenerator();
-		return value;
-	};
-	let variable = name();
-	variable.next();
-	variable.next();
-	variable.next(50);
-
-	variable.throw(new Error('message'));
-
-	async func(); // выполнить функцию асинхронно;
-	await func(); // подожди пока функция выполнится а потом иди дальше по коду;
-
-	let proxy = new Proxy(target, handlers);
-	/* handlers = {
-		get(target, property, receiver),
-		set(target, property, value, receiver),
-		has(target, phrase),
-		deleteProperty(target, phrase),
-		apply(target, thisArgument, argumentsList),
-		construct(target, argumentsList)
-	}
-
-	*/
-
-	let {proxy, revoke} = Proxy.revocable(target, handlers); // Отключаемый прокси. Вызов revoke() удалит все ссылки и выключит proxy
-
-	Reflect.get(obj, prop, receiver); // Use inside new Proxy. Для прамого и короткого доступа на оригинальный объект. Читай документацию и о дополнительных свойствах
-	Reflect.set(obj, prop, value, receiver); // Use inside new Proxy. Для прамого и короткого доступа на оригинальный объект. Читай документацию и о дополнительных свойствах
-
-	let range = document.createRange();
-	range.setStart(textNode, offsetPoint);
-	range.setEnd(textNode, offsetPoint); // use toString() method for convert to a string;
-
-	getSelection(); // return object from mouse selected txt;
-	getSelection().removeAll(); // remove all selection;
->>>>>>> 2413c293d74d8be0e47c283e9349244b9099d9cc
 
 
 
