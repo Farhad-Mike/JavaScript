@@ -180,9 +180,10 @@ date.toDateString(); // return only date;
 date.toTimeString(); // return only time;
 date.toUTCString();
 date.toISOString();
-navigator.userAgent;
-navigator.platform;
+navigator.userAgent; //  информация о текущем браузере
+navigator.platform; // информация о платформе (может помочь в понимании того, в какой ОС открыт браузер – Windows/Linux/Mac и так далее)
 location;
+location.href; // одно и тоже что и location
 document.documentElement;
 document.title;
 document.head;
