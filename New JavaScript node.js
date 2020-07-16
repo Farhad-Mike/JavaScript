@@ -203,14 +203,15 @@ tr.sectionRowIndex; // номер строки в текущей секции TH
 tr.rowIndex; // номер строки в таблице
 td.cellIndex; // номер ячейки в строке
 elem.onclick = func();
-elem.matches('selector');
-elem.closest('selector');
+elem.matches('selector'); // return true/false если элемент удовлетворяет данному селектору
+elem.closest('selector'); // ищет ближайшего предка, который соответствует CSS-селектору. Сам элемент также включается в поиск. return elem/null
 elem.parentNode;
 elem.childNodes;
 elem.firstChild;
 elem.lastChild;
 elem.previousSibling;
 elem.nextSibling;
+elem.hasChildNodes(); // Does element have childes or not? true/false
 elem.parentElement;
 elem.children;
 elem.firstElementChild;
@@ -223,20 +224,26 @@ document.createElement('tag', { is: mainTag });
 document.createTextNode('text');
 let img = new Image(width, height);
 elem.cloneNode(true / false);
-var tmp = document.createDocumentFragment();
+var tmp = document.createDocumentFragment();	// два одинаковых результата
+var tmp = new DocumentFragment(); 	// два одинаковых результата
 var style = getComputedStyle(elem, psevdo - selector);
 elem.style.MozBorderRadius;
-elem.style.cssText = 'cssText';
+elem.style.cssText = 'cssText'; // Для задания нескольких стилей в одной строке. Это свойство редко используется, потому что такое присваивание удаляет все существующие стили
+elem.style.prop = 'value';
 document.write('HTML');
 document.writeIn('HTML');
-node.append(node2); // thats methods isn't return node. Can be added a few nodes at one moment
-node.prepend(node2);
-node.after(node2);
-node.before(node2);
-node.replaceWith(node2);
+node.append(...nodes or strings)		// добавляет узлы или строки в конец node, строки вставляются безопасным способом, как делает это elem.textContent. thats methods don't return node.
+node.prepend(...nodes or strings)		// вставляет узлы или строки в начало node,
+node.before(...nodes or strings) 		// вставляет узлы или строки до node,
+node.after(...nodes or strings) 		// вставляет узлы или строки после node,
+node.replaceWith(...nodes or strings) 	// заменяет node заданными узлами или строками.
 elem.insertAdjacentText('where', 'text'); // beforebegin...
 elem.insertAdjacentHTML('where', 'HTML');
-elem.insertAdjacentElement('where', elem2);
+elem.insertAdjacentElement('where', elem2);	// where:				
+											"beforebegin" – вставить html непосредственно перед elem,
+											"afterbegin" – вставить html в начало elem,
+											"beforeend" – вставить html в конец elem,
+											"afterend" – вставить html непосредственно после elem.
 elem.appendChild(elem);
 elem.removeChild(elem2);
 elem.remove(); // remove elem
@@ -251,8 +258,8 @@ elem.scrollHeight;
 elem.scrollWidth;
 elem.scrollTop;
 elem.scrollLeft;
-elem.clientWidth; // используя document.documentElement выведет только видимую область окна браузера без прокрутки
-elem.clientHeight;
+elem.clientWidth; // используя document.documentElement выведет только видимую область окна браузера без прокрутки. Они включают в себя ширину области содержимого вместе с внутренними отступами padding, но без прокрутки
+elem.clientHeight; // Они включают в себя ширину области содержимого вместе с внутренними отступами padding, но без прокрутки
 elem.clientTop;
 elem.clientLeft;
 elem.innerHTML;
@@ -261,8 +268,8 @@ window.innerWidth; // выведет только видемую  область
 window.innerHeight;
 window.screenY; // верхний и левый угол браузера относительно всего экрана
 window.screenX;
-window.pageYOffset;
-window.pageXOffset;
+window.pageYOffset; // Сколько прокрутки осталось для окна браузера
+window.pageXOffset; // Сколько прокрутки осталось для окна браузера
 window.open();
 scrollTo(x, y); // на конкретную позицию
 scrollBy(x, y); // относительно текущих координат
@@ -271,7 +278,7 @@ screen.height;
 screen.availHeight;
 screen.availWidth;
 document.elementFromPoint(x, y); // относительно окна браузера, для координат вне окна возвращает null
-let clientRect = elem.getBoundingClientRect(); // относительно документа
+let clientRect = elem.getBoundingClientRect(); // относительно окна браузера
 clientRect.top;
 clientRect.left;
 clientRect.bottom;
@@ -279,13 +286,15 @@ clientRect.right;
 clientRect.width;
 clientRect.height;
 elem.getClientRects();
-elem.scrollIntoView(true / false);
+elem.scrollIntoView(true / false); // default == true. true - Верхний край элемента совмещён с верхней частью окна элемента. false - Нижний край элемента будет совмещён с нижним краем окна элемента.
 elem.hasAttribute('att');
 elem.getAttribute('att');
 elem.setAttribute('name', 'value');
 elem.removeAttribute('att');
 elem.attributes; // Коллекция attributes содержит все атрибуты в виде объектов со свойствами name и value
+elem.dataset.firstSecond; // <div data-first-second='value'></div>
 elem.className;
+elem.classList; // return iterable object looks like array, but it is not array
 elem.classList.add('className');
 elem.classList.remove('className');
 elem.classList.toggle('className');
@@ -296,6 +305,7 @@ elem.tagName; // return element's name; Теги всегда выводятся
 elem.nodeValue;
 elem.data;
 elem.textContent;
+elem.isHidden; // вернёт true для элементов, которые в принципе показываются, но их размеры равны нулю (например, пустые <div>).
 //elem == id from HTML
 elem.addEventListener('event', handler[, true / false]); // true = capture, false == bubble;
 elem.removeEventListener('event', handler[, phase]);

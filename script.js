@@ -1,8 +1,5 @@
 'use strict';
 
-let obj = {};
 
-'use strict'
+let a = document.querySelector('div').classList;
 
-
-multiplyNumeric(salaries)
