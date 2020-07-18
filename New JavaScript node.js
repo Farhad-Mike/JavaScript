@@ -307,53 +307,23 @@ elem.data;
 elem.textContent;
 elem.isHidden; // вернёт true для элементов, которые в принципе показываются, но их размеры равны нулю (например, пустые <div>).
 //elem == id from HTML
-elem.addEventListener('event', handler[, true / false]); // true = capture, false == bubble;
-elem.removeEventListener('event', handler[, phase]);
+elem.addEventListener('event', handler[, obj]); // obj = {capture: true/false, once: true/false, passive: true/false, passive: true/false}.  Вместо obj можно использовать true/false как короткая запись {capture: true/false}
+												// once: если true, тогда обработчик будет автоматически удалён после выполнения.
+												// passive: если true, то указывает, что обработчик никогда не вызовет preventDefault()
+												// capture: Если аргумент true, то событие будет перехвачено при погружении, Если аргумент false (по умолчанию), то событие будет поймано при всплытии.
+												// passive: passive: true сигнализирует браузеру, что обработчик не собирается выполнять preventDefault(). Необязательная опция, но может немного увеличить плавность. Для некоторых браузеров (Firefox, Chrome) опция passive по умолчанию включена в true для таких событий, как touchstart и touchmove.
+												// Можно вместо handler передать объект с методом handleEvent. То есть {handleEvent(){}}
+elem.removeEventListener('event', handler[, obj]);
 elem.dispatchEvent(event);
-event.isTrusted; // return true/false.
-event.clientY; // относительно окна браузера
-event.clientX;
-event.pageX; // относительно документа позиция мыши
-event.pageY;
-event.offsetX; // относительно родительского элемента
-event.offsetY;
-event.screenX; // like event.clientX;
-event.screenY; // like event.clientY;
+
 
 elem.ontouchstart;
 elem.ontouchend;
 elem.ontouchmove;
 elem.ontouchcancel;
 
-event.touches[0].clientX; // the prop isn't exist for .ontouchend;
-event.touches[0].clientY;
-event.changedTouches[0].clientX;
-event.changedTouches[0].clientY; // the prop exist in all touch events;
-event.target.name; // get name attr from input elem and matches elements;
-event.type;
-event.currentTarget; // == this;
-event.target; // the most bottom element on whitch has called event;
-event.stopPropagation(); // останавливает всплытие события, но на самом элементе обработаются все соответствующиеся события.
-event.stopImmediatePropagation(); // останавливает всплытие и так же предотвращает все соответствующие события на самом элементе.
-event.preventDefault();
-event.eventPhase; // 1 or 2 or 3;
+
 elem.dataset[aboutPosition]; // attribute [data-about-position];
-var event = new Event('event type', { bubble: true / false, cancelable: true / false });
-var event = new CustomEvent('event type', { bubble: true / false, cancelable: true / false, detail: {} });
-new MouseEvent();
-new KeyboardEvent(); // и т.д
-event.relatedTarget;
-event.which; // 1 == left, 2 == center, 3 == right mouse buttons; and for discover keyboard keydown, keyup, keypress events;
-event.deltaY; // how much has been scrroled with wheel;
-event.deltaX;
-event.deltaZ;
-event.keyCode; // work on all browser except on the IE. Works like event.which; keyCode work only for keydown and keyup;
-event.charCode; // work only for event 'keypress' and only for symbol;
-{ keydown, keypress/*only for symbols and return symbol for lower or uppercase*/, keyup }
-event.shiftKey;
-event.ctrlKey;
-event.metaKey;
-event.altKey;
 //DOMContentLoaded can be added only with method addEventListener('DOMContentLoaded', func);
 //window.onload;
 //window.onunload;
@@ -603,15 +573,7 @@ xhr.upload.onprogress;
 xhr.upload.onload; // Событие при полной загрузки на сервер.
 xhr.upload.onerror;
 // xhr.upload имеет все те же самые события как и xhr.
-event.lengthComputable; // false/true неизвестный рамер либо нулевой размер тела. Только при получении ответа с сервера.
-event.loaded; // Кол-во загруженных байтов.
-event.total; // Общее кол-во байтов.
-event.reason; // причина закрытия соединения.
-event.wasClean; // true/false чистое закрытие или обрыв
-event.code;
-event.origin; // При кросс-доменных запросах появится. Откуда пришли данные (домен);
-event.reason;
-event.data;
+
 
 /* Коды закрытия вебсокета (event.code) */
 1000 // Нормальное закрытие.
@@ -647,8 +609,7 @@ form.target = frame; // Куда возвращать ответ;
 form.method = 'POST'; // Какой метод использовать;
 
 elem.ontransitionend; // Событие по окончанию анимации;
-event.propertyName; // Свойство, анимация которго завершилась.
-event.elepsedTime; // Время (в секундах), которое заняла анимация, без учета transition-delay.
+
 
 let id = requestAnimationFrame(callback); // callback получает один аргумент – время, прошедшее с начала загрузки страницы, результат вызова performance.now().
 cancelAnimationFrame(id);
