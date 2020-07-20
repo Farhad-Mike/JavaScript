@@ -329,22 +329,25 @@ elem.dataset[aboutPosition]; // attribute [data-about-position];
 //window.onunload;
 //window.onbeforeunload;
 //elem.onerror;
-iframe.contentWindow.document; // get link of document from domain;
+document.readyState // Есть три возможных значения: "loading" – документ загружается. "interactive" – документ был полностью прочитан. "complete" – документ был полностью прочитан и все ресурсы (такие как изображения) были тоже загружены.
+document.readystatechange // генерируется при изменении состояния document.readyState
+iframe.contentWindow.document;	 // get link of document from domain;
 document.forms[name / index];
-form.elements[name / index]; // if form have a few elements with same name, the form.elements will return collection of elements;
+form.elements[name / index];	 // if form have a few elements with same name, the form.elements will return collection of elements;
 fieldset.elements[name / index];
-element.form; // will return parentElement 'form' of the elements;
+element.form; // will return parentElement 'form' of the element;
 input.checked;
-select.selectedIndex = n;
-select.selectedIndex = -1; // cleare selectedIndex;
+select.selectedIndex = n;	
+select.selectedIndex = -1; 		// cleare selectedIndex;
 select.value;
 select.options;
-option.selected; // true/false; the same like select.options[i].selected; if multiple attribute exist you can select a few options;
-option.text;
-option.index;
+option.selected; 				// Выбрана ли опция. true/false; the same like select.options[i].selected; if multiple attribute exist you can select a few options;
+option.text;    				// Содержимое опции (то, что видит посетитель).		
+option.index;					// Номер опции среди других в списке <select>.
 var option = new Option(text, value[, defaultSelected, selected]) // if want to be selected by default the 3 and 4 arguments must be true;
 input.focus(); // данным вариантом можно вызвать любое событие из скрипта.
 input.bloor();
+elem.tabIndex = 1; 				// Мы можем добавить tabindex из JavaScript, используя свойство elem.tabIndex.
 document.activeElement; // at the moments focused element;
 class User {
 	constructor(arguments) {
@@ -393,7 +396,8 @@ elem.oncopy;
 elem.onpaste;
 elem.oncut;
 elem.onsubmit;
-form.submit(); // will not call event submit
+form.submit(); // При этом событие submit не генерируется.
+navigator.sendBeacon(url, data) // Он посылает данные в фоне. Переход к другой странице не задерживается: браузер покидает страницу, но всё равно выполняет sendBeacon. Размер данных ограничен 64 Кб.
 input.defaultChecked;
 input.defaultSelected;
 elem.ownerDocument; // always return the higest node of the elem. For DOM elem will return document;
