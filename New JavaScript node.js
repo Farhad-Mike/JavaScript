@@ -745,9 +745,51 @@ let proxy = new Proxy(target, handlers);
 
 */
 
-let range = document.createRange();
-range.setStart(textNode, offsetPoint);
-range.setEnd(textNode, offsetPoint); // use toString() method for convert to a string;
+let range = new Range();
+setStart(node, offset) 		// установить начальную границу в позицию offset в node
+setStartBefore(node) 		// установить начальную границу прямо перед node
+setStartAfter(node) 		// установить начальную границу прямо после node
+setEnd(node, offset) 		// установить конечную границу в позицию offset в node
+setEndBefore(node) 			// установить конечную границу прямо перед node
+setEndAfter(node) 			// установить конечную границу прямо после node
+selectNode(node) 			// выделить node целиком
+selectNodeContents(node) 	// выделить всё содержимое node
+collapse(toStart) 			// если указано toStart=true, установить конечную границу в начало, иначе установить начальную границу в конец, схлопывая таким образом диапазон
+cloneRange() 				// создать новый диапазон с идентичными границами
+deleteContents()  			// удалить содержимое диапазона из документа
+extractContents()   		// удалить содержимое диапазона из документа и вернуть как DocumentFragment
+cloneContents()  			// склонировать содержимое диапазона и вернуть как DocumentFragment
+insertNode(node)  			// вставить node в документ в начале диапазона
+surroundContents(node)   	// обернуть node вокруг содержимого диапазона. Чтобы этот метод сработал, диапазон должен содержать как открывающие, так и закрывающие теги для всех элементов внутри себя: не допускаются частичные диапазоны по типу <i>abc.
+
+// SELECTION
+document.getSelection()		// взять выделение
+							anchorNode		// узел, с которого начинается выделение,
+							anchorOffset	// смещение в anchorNode, где начинается выделение,
+							focusNode		// узел, на котором выделение заканчивается,
+							focusOffset		// смещение в focusNode, где выделение заканчивается,
+							isCollapsed		// true, если диапазон выделения пуст или не существует.
+							rangeCount		// количество диапазонов в выделении, максимум 1 во всех браузерах, кроме Firefox.						
+							getRangeAt(i)   // взять i-ый диапазон, начиная с 0. Во всех браузерах, кроме Firefox, используется только 0.
+							addRange(range) // добавить range в выделение. Все браузеры, кроме Firefox, проигнорируют этот вызов, если в выделении уже есть диапазон.
+							removeRange(range)			// удалить range из выделения.
+							removeAllRanges()			// удалить все диапазоны.
+							empty()			// сокращение для removeAllRanges.
+							collapse(node, offset)		// заменить выделенный диапазон новым, который начинается и заканчивается на node, на позиции offset.
+							setPosition(node, offset)	// то же самое, что collapse (дублирующий метод-псевдоним).
+							collapseToStart()			// схлопнуть (заменить на пустой диапазон) к началу выделения,
+							collapseToEnd()	// схлопнуть диапазон к концу выделения,
+							extend(node, offset)		// переместить фокус выделения к данному node, с позиции offset,
+							setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)	// заменить диапазон выделения на заданные начало anchorNode/anchorOffset и конец focusNode/focusOffset. Будет выделено всё содержимое между этими границами
+							selectAllChildren(node)		// выделить все дочерние узлы данного узла node.
+							deleteFromDocument()		// удалить содержимое выделения из документа.
+							containsNode(node, allowPartialContainment = false)	// проверяет, содержит ли выделение node (частично, если второй аргумент равен true)
+
+
+
+
+
+
 
 getSelection(); // return object from mouse selected txt;
 getSelection().removeAll(); // remove all selection;
@@ -776,3 +818,18 @@ func.bind(context, ...args) // Привязка контекста
 
 import(moduleName); // загружает модуль и возвращает промис, результатом которого становится объект модуля, содержащий все его экспорты. Использовать его мы можем динамически в любом месте кода. мы не можем скопировать import в другую переменную или вызвать при помощи .call/apply. Это не функция
 
+
+let observer = new MutationObserver(callback);  // наблюдатель за изменениями с помощью колбэк-функции
+observer.observe(node, config); 	// Потом прикрепляем его к DOM-узлу. config – это объект с булевыми параметрами «на какие изменения реагировать»:
+									childList 				// изменения в непосредственных детях node,
+									subtree 				// во всех потомках node,
+									attributes 				// в атрибутах node,
+									attributeFilter 		// массив имён атрибутов, чтобы наблюдать только за выбранными.
+									characterData 			// наблюдать ли за node.data (текстовое содержимое),						
+									characterDataOldValue 	// если true, будет передавать и старое и новое значение node.data в колбэк (см далее), иначе только новое (также требуется опция characterData),
+									attributeOldValue 		// если true, будет передавать и старое и новое значение атрибута в колбэк (см далее), иначе только новое (также требуется опция attributes).
+observer.disconnect()	// останавливает наблюдение
+let mutationRecords = observer.takeRecords()	// получает список необработанных записей изменений, которые произошли, но колбэк для них ещё не выполнился
+
+
+queueMicrotask(func);	// Запланировать микрозадачу
