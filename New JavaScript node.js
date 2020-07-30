@@ -858,7 +858,42 @@ let byts = new ArrayBuffer(bits);		// создаётся буфер длиной
 let eight = new Uint8Array(byts);		// представляет каждый байт в ArrayBuffer как отдельное число; возможные значения находятся в промежутке от 0 до 255 (в байте 8 бит, отсюда такой набор). Такое значение называется «8-битное целое без знака».
 let sixteen = new Uint16Array(byts);	// представляет каждые 2 байта в ArrayBuffer как целое число; возможные значения находятся в промежутке от 0 до 65535. Такое значение называется «16-битное целое без знака».
 let thtwo = new Uint32Array(byts);		// представляет каждые 4 байта в ArrayBuffer как целое число; возможные значения находятся в промежутке от 0 до 4294967295. Такое значение называется «32-битное целое без знака».
-let sixfour = new Float64Array(byts);	// представляет каждые 8 байт в ArrayBuffer как число с плавающей точкой; возможные значения находятся в промежутке между 5.0x10-324 и 1.8x10308.
-byts.byteLength; // Show bits lengts
-eight[index] = number;
-eight[index]; // get number
+let flthtwo = new Float32Array(byts);   // 32-битные числа со знаком и плавающей точкой
+let sixfour = new Float64Array(byts);	// 64-битные числа со знаком и плавающей точкой представляет каждые 8 байт в ArrayBuffer как число с плавающей точкой; возможные значения находятся в промежутке между 5.0x10-324 и 1.8x10308.
+byts.byteLength; 			// Show bits lengts
+byts.set(fromArr, [offset])	// копирует все элементы из fromArr в arr, начиная с позиции offset (0 по умолчанию)
+byts.subarray([begin, end])	// создаёт новое представление того же типа для данных, начиная с позиции begin до end (не включая). Это похоже на метод slice (который также поддерживается), но при этом ничего не копируется – просто создаётся новое представление, чтобы совершать какие-то операции над указанными данными.
+eight[index] = number;		// 
+eight[index]; 				// get number
+eight.buffer; 				// ссылка на объект ArrayBuffer
+eight.length; 				// именно столько чисел сейчас хранится в буфере (не сумма)
+eight.byteLength; 			// размер содержимого в байтах, работает точно так же как и byts.byteLength;
+eight.BYTES_PER_ELEMENT; // Сколько байтов выделено на каждое целое число
+Есть 5 вариантов создания типизированных массивов:	// TypedArray это один из Uint8Array, Uint16Array, Uint32Array, Float64Array
+	new TypedArray(buffer, [byteOffset], [length]);	// Дополнительно можно указать аргументы byteOffset (0 по умолчанию) и length (до конца буфера по умолчанию), тогда представление будет покрывать только часть данных в buffer.
+	new TypedArray(object);							// Если в качестве аргумента передан Array или какой-нибудь псевдомассив, то будет создан типизированный массив такой же длины и с тем же содержимым
+	new TypedArray(typedArray);						// Если в конструктор передан другой объект типа TypedArray, то делается то же самое: создаётся типизированный массив с такой же длиной и в него копируется содержимое. При необходимости значения будут приведены к новому типу.
+	new TypedArray(length);
+	new TypedArray();
+new Int8Array(value);	//  целые числа со знаком (могут быть отрицательными)
+new Int16Array(value);	//  целые числа со знаком (могут быть отрицательными)
+new Int32Array(value);	//  целые числа со знаком (могут быть отрицательными)
+new Uint8ClampedArray(value);	// В него записываются значения 255 для чисел, которые больше 255, и 0 для отрицательных чисел.
+new DataView(buffer, [byteOffset], [byteLength])	// buffer – ссылка на бинарные данные ArrayBuffer. В отличие от типизированных массивов, DataView не создаёт буфер автоматически. Нам нужно заранее подготовить его самим. byteOffset – начальная позиция данных для представления (по умолчанию 0). byteLength – длина данных (в байтах), используемых в представлении (по умолчанию – до конца buffer).
+let dataView = new DataView(new ArrayBuffer(value)); // В случае DataView доступ к данным осуществляется посредством методов типа .getUint8(i) или .getUint16(i). Мы выбираем формат данных в момент обращения к ним, а не в момент их создания.
+dataView.getUint8(index);
+dataView.getUint16(index);
+dataView.getUint32(index);
+dataView.getFloat32(index);
+dataView.getFloat64(index);
+dataView.getInt8(index);
+dataView.getInt16(index);
+dataView.getInt32(index);
+dataView.setUint8(index, value);
+dataView.setUint16(index, value);
+dataView.setUint32(index, value);
+dataView.setFloat32(index, value);
+dataView.setFloat64(index, value);
+dataView.setInt8(index, value);
+dataView.setInt16(index, value);
+dataView.setInt32(index, value);
