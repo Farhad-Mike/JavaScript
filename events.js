@@ -31,6 +31,10 @@ DOMContentLoaded    // браузер полностью загрузил HTML, 
 transitionend   // когда CSS-анимация завершена
 selectstart     // когда с elem начинается выделение, например пользовать начинает двигать мышкой с зажатой кнопкой.
 selectionchange // когда выделение изменено. этот обработчик можно поставить только на document
+window.onresize // При изменение размеров окна, например открытых при popup
+message         // Событие срабатывающее при получении информации от postMessage. Ставится на window получателя
+
+
 
 /////    event Object    /////
 
@@ -74,7 +78,7 @@ event.reason;           // причина закрытия соединения.
 event.wasClean;         // true/false чистое закрытие или обрыв
 event.origin;           // При кросс-доменных запросах появится. Откуда пришли данные (домен);
 event.reason;
-event.data;
+event.data;             // При кросс-доменных запросах, информация полученная по postMessage(data, url); 
 event.propertyName;     // Свойство, анимация которго завершилась.
 event.elepsedTime;      // Время (в секундах), которое заняла анимация, без учета transition-delay.
 var event = new Event('event type', { bubble: true / false, cancelable: true / false }); // По умолчанию оба свойства установлены в false: {bubbles: false, cancelable: false} У второго аргумента-объекта есть дополнительное свойство detail, в котором можно указывать информацию для передачи в событие.

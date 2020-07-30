@@ -182,7 +182,7 @@ date.toUTCString();
 date.toISOString();
 navigator.userAgent; //  информация о текущем браузере
 navigator.platform; // информация о платформе (может помочь в понимании того, в какой ОС открыт браузер – Windows/Linux/Mac и так далее)
-location;
+location; // нельзя читать если это другой порт, домен, протокол
 location.href; // одно и тоже что и location
 document.documentElement;
 document.title;
@@ -329,9 +329,10 @@ elem.dataset[aboutPosition]; // attribute [data-about-position];
 //window.onunload;
 //window.onbeforeunload;
 //elem.onerror;
-document.readyState // Есть три возможных значения: "loading" – документ загружается. "interactive" – документ был полностью прочитан. "complete" – документ был полностью прочитан и все ресурсы (такие как изображения) были тоже загружены.
-document.readystatechange // генерируется при изменении состояния document.readyState
-iframe.contentWindow.document;	 // get link of document from domain;
+document.readyState 		// Есть три возможных значения: "loading" – документ загружается. "interactive" – документ был полностью прочитан. "complete" – документ был полностью прочитан и все ресурсы (такие как изображения) были тоже загружены.
+document.readystatechange 	// генерируется при изменении состояния document.readyState
+iframe.contentWindow 		// ссылка на объект window внутри <iframe>. Если это другой домен, протокол, порт то разрешено только получения ссылки на внутренний объект window из iframe.contentWindow, а оттуда можно получить location
+iframe.contentDocument		// ссылка на объект document внутри <iframe>, короткая запись для iframe.contentWindow.document.
 document.forms[name / index];
 form.elements[name / index];	 // if form have a few elements with same name, the form.elements will return collection of elements;
 fieldset.elements[name / index];
@@ -621,24 +622,43 @@ cancelAnimationFrame(id);
 timingEaseOut(timeFraction) = 1 - timing(1 - timeFraction) // easeOut formula
 // easeInOut совмещение и первой и второй половины
 
-open(url, name, param); // Возвращает ссылку на window нового окна, а оттуда можно с ним работать
+open(url, name, param); // Возвращает ссылку на window нового окна, а оттуда можно с ним работать.   url == about:blank то откроется пустое новое окно
 // param === 'left=100,top=100,width=200,height=200,manubar=yes/no,toolbar=yes/no,location=yes/no,status=yes/no,resizable=yes/no,scrollbars=yes/no' без пробелов; По умолчанию no
-opener; // Ссылка на родительское окно; Оно тоже может менять родительское окно
+//param:
+// menubar (yes/no)	 	позволяет отобразить или скрыть меню браузера в новом окне.
+// toolbar (yes/no)	 	позволяет отобразить или скрыть панель навигации браузера (кнопки вперёд, назад, перезагрузки страницы) нового окна.
+// location (yes/no)	позволяет отобразить или скрыть адресную строку нового окна. Firefox и IE не позволяют скрывать эту панель по умолчанию.
+// status (yes/no)		позволяет отобразить или скрыть строку состояния. Как и с адресной строкой, большинство браузеров будут принудительно показывать её.
+// resizable (yes/no)	позволяет отключить возможность изменения размера нового окна. Не рекомендуется.
+// scrollbars (yes/no)	позволяет отключить полосы прокрутки для нового окна. Не рекомендуется.
+
+opener; // Ссылка на родительское окно; Popout может менять родительское окно
 window.onresize;
-window.close; // true/false;
+let win = open('/');
+win.closed; // true/false; можно легко проверить, закрыт ли попап (или главное окно) или все ещё открыт.
 window.close(); // close if the window has opened by window.open();
 window.moveBy(x, y); // move to right, down from start point;
 window.moveTo(x, y); // move to x, y position относительно экрана;
 window.resizeBy(width, height); // resize window from start point;
 window.resizeTo(width, height); // resize window to that width and height;
 window.frames[0]; // like iframe.contentWindow;
-window.frames.iframeName;
+window.frames.iframeName; 
 window.parent; // iframe.contentWindow.parent == window;
 window.top; // the higest window;
-document.domain = 'third lvl domain/first lvl'; // Снимает ограничение между доменами. Нужно прописывать на всех сайтах. Домен у всех должен быть одинаков
-window.postMessage(data, 'domain'); // window == another iframe or tab, domain "*" is mean to all;
+document.domain = 'secondDomain.com'; // Снимает ограничение между доменами. Нужно прописывать на всех сайтах. Домен второго уровня (peter.site.com, john.site.com) у всех должен быть одинаков
+window.postMessage(data, 'https://domain.com'); // window == another iframe or tab, domain "*" is mean разницы нету какой открыт iframe все равно послать туда инфо (небезопасно)
 window.addEventListener('message'); // event.data/Присланные данные event.origin/Источник, из которого пришло сообщение, например http://javascript.ru. event.source/Ссылка на окно, с которого пришло сообщение. Можно тут же ответить.
 window.focus(); // По разному в бразерах. но в основном ничего не делает
+
+<iframe sandbox='prop prop2 prop3 ...'></iframe>	// sandbox:  По умолчанию атрибут <iframe sandbox></iframe> Устанавливает полное ограничение, если не указать нужные параметры как ниже.
+													 //	allow-same-origin - "sandbox" принудительно устанавливает «другой источник» для ифрейма. Другими словами, он заставляет браузер воспринимать iframe, как пришедший из другого источника, даже если src содержит тот же сайт. Со всеми сопутствующими ограничениями для скриптов. Эта опция отключает это ограничение.
+													 // allow-top-navigation - Позволяет ифрейму менять parent.location.
+													 // allow-forms - Позволяет отправлять формы из ифрейма.
+													 // allow-scripts - Позволяет запускать скрипты из ифрейма.
+													 // allow-popups - Позволяет открывать всплывающие окна из ифрейма с помощью window.open.
+
+
+
 
 let regexp = new RegExp('str', 'flag'); // flag == i/g/m;
 let regexp = /str/flag;
@@ -833,3 +853,12 @@ let mutationRecords = observer.takeRecords()	// получает список н
 
 
 queueMicrotask(func);	// Запланировать микрозадачу
+
+let byts = new ArrayBuffer(bits);		// создаётся буфер длиной 16 байт заполненный нулями
+let eight = new Uint8Array(byts);		// представляет каждый байт в ArrayBuffer как отдельное число; возможные значения находятся в промежутке от 0 до 255 (в байте 8 бит, отсюда такой набор). Такое значение называется «8-битное целое без знака».
+let sixteen = new Uint16Array(byts);	// представляет каждые 2 байта в ArrayBuffer как целое число; возможные значения находятся в промежутке от 0 до 65535. Такое значение называется «16-битное целое без знака».
+let thtwo = new Uint32Array(byts);		// представляет каждые 4 байта в ArrayBuffer как целое число; возможные значения находятся в промежутке от 0 до 4294967295. Такое значение называется «32-битное целое без знака».
+let sixfour = new Float64Array(byts);	// представляет каждые 8 байт в ArrayBuffer как число с плавающей точкой; возможные значения находятся в промежутке между 5.0x10-324 и 1.8x10308.
+byts.byteLength; // Show bits lengts
+eight[index] = number;
+eight[index]; // get number

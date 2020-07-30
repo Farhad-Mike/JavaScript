@@ -1,6 +1,6 @@
 'use strict';
 
 
-let form = document.forms.credentials.elements.username.form.elements.username.form;
+let bits = new ArrayBuffer(16);
 
-console.log(form)
+console.log(bits.byteLength);
