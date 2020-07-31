@@ -897,3 +897,34 @@ dataView.setFloat64(index, value);
 dataView.setInt8(index, value);
 dataView.setInt16(index, value);
 dataView.setInt32(index, value);
+
+let decoder = new TextDecoder([label], [options]); 	// Создать сам декодер текста. label – тип кодировки, utf-8 используется по умолчанию. options – объект с дополнительными настройками: fatal – boolean, если значение true, тогда генерируется ошибка для невалидных (не декодируемых) символов, в ином случае (по умолчанию) они заменяются символом \uFFFD. ignoreBOM – boolean, если значение true, тогда игнорируется BOM (дополнительный признак, определяющий порядок следования байтов), что необходимо крайне редко.
+let str = decoder.decode(bufferSource, [options]); 	// Декодировать текст из типизированного массива. options – объект с дополнительными настройками: stream – true для декодирования потока данных, при этом decoder вызывается вновь и вновь для каждого следующего фрагмента данных. В этом случае многобайтовый символ может иногда быть разделён и попасть в разные фрагменты данных. Это опция указывает TextDecoder запомнить символ, на котором остановился процесс, и декодировать его со следующим фрагментом.
+let encoder = new TextEncoder(); 					// Создать сам кодер текста. Поддерживается только кодировка «utf-8».
+let binary = encoder.encode(str); 					// возвращает бинарный массив Uint8Array, содержащий закодированную строку.
+let binary = encoder.encodeInto(str, destination);	// кодирует строку (str) и помещает её в destination, который должен быть экземпляром Uint8Array.
+
+let blob = new Blob(blobParts, options);			// blobParts – массив значений Blob/BufferSource/String. options – необязательный объект с дополнительными настройками: type – тип объекта, обычно MIME-тип, например. image/png, endings – если указан, то окончания строк создаваемого Blob будут изменены в соответствии с текущей операционной системой (\r\n или \n). По умолчанию "transparent" (ничего не делать), но также может быть "native" (изменять).
+blob.slice([byteStart], [byteEnd], [contentType]);	// получить срез Blob. byteStart – стартовая позиция байта, по умолчанию 0. byteEnd – последний байт, по умолчанию до конца. contentType – тип type создаваемого Blob-объекта, по умолчанию такой же, как и исходный.  отрицательные числа также разрешены.
+URL.createObjectURL(blob);	// берёт Blob и создаёт уникальный URL для него в формате blob:<origin>/<uuid>.
+URL.revokeObjectURL(url);	//  удаляет внутреннюю ссылку на объект, что позволяет удалить его (если нет другой ссылки) сборщику мусора, и память будет освобождена.
+
+let file = new File(fileParts, fileName, [options]);	// fileParts – массив значений Blob/BufferSource/строки. fileName – имя файла, строка. options – необязательный объект со свойством: lastModified – дата последнего изменения в формате таймстамп (целое число).
+file.name;			// имя файла
+file.lastModified;	// таймстамп для даты последнего изменения.
+let reader = new FileReader();		// объект, цель которого читать данные из Blob (и, следовательно, из File тоже).
+reader.readAsArrayBuffer(blob) 		// считать данные как ArrayBuffer
+reader.readAsText(blob, [encoding])	// считать данные как строку (кодировка по умолчанию: utf-8)
+reader.readAsDataURL(blob)			// считать данные как base64-кодированный URL.
+reader.abort()						// отменить операцию.
+reader.result; 						// результат чтения (если оно успешно)
+reader.error; 						// объект ошибки (при неудаче).
+	В процессе чтения происходят следующие события:
+		loadstart – чтение начато.
+		progress – срабатывает во время чтения данных.
+		load – нет ошибок, чтение окончено.
+		abort – вызван abort().
+		error – произошла ошибка.
+		loadend – чтение завершено (успешно или нет).
+
+
