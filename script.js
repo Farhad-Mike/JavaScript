@@ -1,12 +1,29 @@
 'use strict';
 
+function trackRobot(...steps) {
+	if(!steps.length) return [0, 0];
+    let [x, y] = [0, 0];
 
-let a = new Uint8Array([1, 2, 3, 4]);
-let b = new Uint8Array([5, 6, 7, 8]);
 
-let c = new Uint8Array(8);
+	for(let i = 0; i < steps.length; i++) {
+        console.log(i, i % 2 == 0)
+        if(i % 4 == 0) {
+            x += steps[i];
+        } else if(i % 2 == 0) {
+            y += steps[i]
+        } else if(i % 3 == 0) {
+            x -= steps[i];
+        } else {
+            y -= steps[i]
+        }
+        
+    }
 
-c.set(a, 0);
-c.set(b, 4);
+    return [x, y]
+	
+}
 
-console.log(c)
+
+trackRobot(20, 30, 10, 40)
+trackRobot()
+trackRobot(-10, 20, 10)

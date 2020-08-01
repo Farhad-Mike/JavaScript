@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.calc {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc__inner {
+    width: 100%;
+    max-width: 800px;
+    background-color: #424242;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.calc__display {
+    border: none;
+    outline: none;
+    padding: 7px;
+    width: 100%;
+    border-radius: 7px;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.calc__main {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calc__numbers {
+    display: grid;
+    gap: 7px;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    width: 60%;
+    margin-right: 10px;
+}
+
+.calc__number {
+    background-color: #d95d16;
+    padding: 5px;
+    font-size: 24px;
+    line-height: 32px;
+    border-radius: 7px;
+    text-align: center;
+    color: #fff;
+}
+
+.calc__operations {
+    display: grid;
+    gap: 7px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    width: 40%;
+}
+
+.calc__operation {
+    background-color: #1671d9;
+    padding: 13px;
+    font-size: 24px;
+    line-height: 32px;
+    border-radius: 7px;
+    text-align: center;
+    color: #fff;
+}
+
+.calc__number,
+.calc__operation {
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.calc__number:active,
+.calc__operation:active {
+    cursor: pointer;
+    box-shadow: 0 0 7px 0 white inset;
+}
