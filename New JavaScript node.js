@@ -458,7 +458,6 @@ let weakSet = new WeakSet(); // everything work like for WeakMap constructor; bu
 
 // Book 3;
 
-
 let customeTag = customElements.define('word-count', WordCount, { extends: 'p' });
 customElements.whenDefined('app-drawer').then(() => {
 	console.log('app-drawer defined');
@@ -492,92 +491,16 @@ let exportedDom = document.currentScript.ownerDocument; // возвражает 
 
 link.import // доступен DOM экспортируемого документа;
 
-let xhr = new XMLHttpRequest();
-xhr.open('GET/POST/...', 'URL', true / false, 'username', 'password');
-xhr.send([body]);
-xhr.status; // return cause from server, 0 if server do not respond;
-xhr.statusText;
-xhr.responseText; // return answer from server;
-xhr.responseXML; // return answer from server in XML format;
-xhr.abort(); // abort request;
 
-xhr.onreadystatechange; // обытие readystatechange происходит несколько раз в процессе отсылки и получения ответа.
-xhr.readyState; // имеет несколько состояний например 4 это запрос завершён;
+let formData = new FormData([form]); // Если передать в конструктор элемент HTML-формы form, то создаваемый объект автоматически прочитает из неё поля. может быть бызван без аргументов. Поля объекта formData можно перебирать, используя цикл for..of
+formData.append(name, value);			// добавляет к объекту поле с именем name и значением value,
+formData.append(name, blob, fileName)	// добавляет поле, как будто в форме имеется элемент <input type="file">, третий аргумент fileName устанавливает имя файла (не имя поля формы), как будто это имя из файловой системы пользователя,
+formData.set(name, value)				// его синтаксис такой же, как у append. Разница в том, что .set удаляет все уже имеющиеся поля с именем name и только затем добавляет новое.
+formData.set(name, blob, fileName)		// его синтаксис такой же, как у append. Разница в том, что .set удаляет все уже имеющиеся поля с именем name и только затем добавляет новое.
+formData.delete(name)					// удаляет поле с заданным именем name,
+formData.get(name)						// получает значение поля с именем name,
+formData.has(name)						// если существует поле с именем name, то возвращает true, иначе false
 
-const unsigned short UNSENT = 0; // начальное состояние
-const unsigned short OPENED = 1; // вызван open
-const unsigned short HEADERS_RECEIVED = 2; // получены заголовки
-const unsigned short LOADING = 3; // загружается тело (получен очередной пакет данных)
-const unsigned short DONE = 4; // запрос завершён
-
-xhr.setRequestHeader('Content‐Type', 'application/json; charset=utf-8'); // поставленный заголовок нельзя снять;
-xhr.getResponseHeader('Content‐Type'); // возвращает значение заголовка ответа, кроме Set‐Cookie и Set‐Cookie2.
-xhr.getAllResponseHeaders(); // возвращает все заголовки ответа, кроме Set‐Cookie и Set‐Cookie2
-xhr.withCredentials = true; // кроссдоменный запрос, разрешить отсылку куки и HTTP авторизацию
-
-xhr.timeout = 30000; // продолжительность асинхронного запроса превышении времени запрос будет оборван и сгенерировано событие ontimeout
-xhr.ontimeout;
-xhr.onload;
-xhr.onloadend;
-xhr.onerror;
-xhr.onprogress; // не чаще чем раз в 50мс.
-xhr.onloadstart;
-xhr.onabort;
-
-encodeURIComponent(str);
-
---boundary // промежуточная граница
---boundary-- // закрывающая
-
-
-	/* Urlencoded GET*/
-	let params = 'name=' + encodeURIComponent(myName) + '&surname=' + encodeURIComponent(mySurname);
-
-xhr.open('GET', '/submit?' + params, true);
-xhr.send();
-/* Urlencoded end */
-
-
-
-/* Urlencoded POST*/
-let bidy = 'name=' + encodeURIComponent(myName) + '&surname=' + encodeURIComponent(mySurname);
-
-xhr.open('POST', '/submit?', true);
-xhr.setRequestHeder('Content-Type', 'application/x-www-form-urlencoded');
-xhr.send(body);
-/* Urlencoded end */
-
-
-
-/* multiplatform/form-data POST*/
-let body = 'Content-Disposition: form-data; name="key" \r\n\r\n data[key] \r\n' + boundary + 'Content-Disposition: form-data; name="key" \r\n\r\n data[key] \r\n';
-let boundary = '--boundary';
-let closeRequest = '--boundary--';
-
-xhr.open('POST', '/submit?', true);
-xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-xnr.send(body + closeRequest);
-/* multiplatform/form-data end*/
-/* multiplatform/form-data POST*/
-let formData = new FormData(document.forms.name); // может быть бызван без аргументов
-formaData.append(key, value); // добавить доболнительно ключ: значение
-xhr.open("POST", '/url');
-xhr.send(formData);
-/* multiplatform/form-data end*/
-
-
-/* JSON */
-xhr.open('POST', '/submit?');
-xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-xhr.send(JSON.stringfy(obj));
-/* JSON end */
-
-xhr.open('GET', 'http://anywhere.com/request', true); // запрос на другой домен
-
-xhr.upload.onprogress;
-xhr.upload.onload; // Событие при полной загрузки на сервер.
-xhr.upload.onerror;
-// xhr.upload имеет все те же самые события как и xhr.
 
 
 /* Коды закрытия вебсокета (event.code) */
@@ -933,6 +856,7 @@ let response = fetch(url[, options]); 	// url – URL для отправки з
 													// Content-Type:
 														// text/plain;charset=UTF-8 		// тело запроса строка
 														// application/json;charset=UTF-8	// тело запроса JSON
+														// form/multipart					// тело запроса <form>
 														// объект Blob имеет встроенный тип (image/png, заданный в toBlob). При отправке объектов Blob он автоматически становится значением Content-Type
 										method: 	// HTTP метод, например POST,
 										body		// тело запроса, одно из списка: 
