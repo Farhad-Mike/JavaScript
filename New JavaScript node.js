@@ -864,6 +864,7 @@ let response = fetch(url[, options]); 	// url – URL для отправки з
 														// объект FormData для отправки данных как form/multipart,
 														// Blob/BufferSource для отправки бинарных данных,
 														// URLSearchParams для отправки данных в кодировке x-www-form-urlencoded, используется редко.
+										signal: controller.signal // Задаем это свойство если хотим через controller.abort() прервать fetch запрос.
 
 response.status			// код статуса HTTP-запроса, например 200.
 response.ok 			// логическое значение: будет true, если код HTTP-статуса в диапазоне 200-299.
@@ -873,4 +874,12 @@ response.formData() 	// возвращает ответ как объект Form
 response.blob()			// возвращает объект как Blob (бинарные данные с типом),
 response.arrayBuffer()	// возвращает ответ как ArrayBuffer (низкоуровневое представление бинарных данных),
 response.body 			// это объект ReadableStream, с помощью которого можно считывать тело запроса по частям. 
+						response.body.getReader()	// Вернет объект с которого методом .read() можно будет каждый раз получать объект {done: true/false, value: Uint8Array}
 response.headers.get('key'); // получить заголовок по его имени. МОЖНО ПЕРЕБЕРАТЬ ПО ЦИКЛУ for of
+							 //	Content-Length длина всего содержимого ответа который мы получим
+
+
+let controller = new AbortController();	// использовать для отмены не только fetch, но и других асинхронных задач.
+controller.abort();						// генерируется событие с именем abort на объекте controller.signal
+controller.signal;						// controller.signal.addEventListener('abort', callback)
+controller.signal.aborted;				// становится равным true если прервано
