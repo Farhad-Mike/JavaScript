@@ -1,21 +1,10 @@
 'use strict';
 
-let app = new Vue({
-    el: '#vue-app',
-    data: {
-        name: 'Farhad',
-        title: 'Maharramov',
-        show: true,
-        items: [
-            {text: 'Hello'},
-            {text: 'My'},
-            {text: 'Name'}
-        ]
-    },
-
-    methods: {
-        showConsole(e) {
-            console.log(e.target.textContent)
-        }
-    }
-})
+(async function getRequest() {
+    let responce = fetch('https://next.json-generator.com/api/json/get/V1enUzl-Y', {
+        method: 'GET'
+    }).then(resolve => {
+        console.log(resolve.headers.get('cache-control'))
+        return resolve.json();
+    }).then(resolve => console.log(resolve))
+}())
