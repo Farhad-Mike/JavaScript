@@ -140,7 +140,20 @@ let response = await Fetch('url', {
   }
 })
 let startByte = +await response.text();
-
+Когда new WebSocket(url) создан, он тут же сам начинает устанавливать соединение.
+Вот пример заголовков для запроса, который делает new WebSocket("wss://javascript.info/chat"):
+    GET /chat
+    Host: javascript.info
+    Origin: https://javascript.info
+    Connection: Upgrade
+    Upgrade: websocket
+    Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
+    Sec-WebSocket-Version: 13
+Если сервер согласен переключиться на WebSocket, то он должен отправить в ответ код 101:
+    101 Switching Protocols
+    Upgrade: websocket
+    Connection: Upgrade
+    Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
 
 
 
