@@ -133,7 +133,13 @@ fetch Процесс получения ответа обычно происхо
     Last-Modified
     Pragma
 
-
+Спросить у сервера сколько байтов от файла он получил:
+let response = await Fetch('url', {
+  headers: {
+    'X-File-Id': fileId
+  }
+})
+let startByte = +await response.text();
 
 
 
