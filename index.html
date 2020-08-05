@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <div id="app">
         <ol>
-            <item
-                v-for='item in messages'
-                v-bind:key='item.id'
-                v-bind:param='item'
-            ></item>
+            <item v-for='item in messages' v-bind:key='item.id' v-bind:param='item'></item>
         </ol>
     </div>
+
+    <p id="value"></p>
+    <textarea style="width:200px; height: 60px;" id="area"></textarea>
+
+    <script>
+        window.addEventListener('load', () => {
+            let textarea = document.getElementById('area');
+            let p = document.getElementById('value');
+
+            let value = localStorage.getItem('area');
+            if (value) {
+                p.textContent = value;
+            }
+
+            textarea.addEventListener('change', (e) => {
+                let target = e.target;
+
+                localStorage.setItem('area', target.value);
+            })
+
+
+        })
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="./script.js"></script>
 </body>
+
 </html>
