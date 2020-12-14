@@ -66,8 +66,8 @@ arr.includes(elem, pos);
 arr.slice(a, b);
 arr.splice(a, n, add, add2);
 arr.concat(arr2, arr3, elem);
-arr.flat(level); // argument level set how much multidimentional is;
-arr.sort(func);
+arr.flat(level); // На сколько уровней вложенности уменьшается мерность исходного массива. По-умолчанию 1. Значение Infinity полностью уберает вложенность
+arr.sort(callBack(a, b)); // Сортирует элементы массива и возвращает отсортированный массив. Можно без callBack()
 arr.forEach(callBack(item, i, arr){}, context); // Контекст в данном случае указывает, откуда всязть callBack функцию. То есть контекст не для самого массива, а для метода. То есть сам метод может ссылаться к каким либо данным внутри своего объекта
 arr.filter(callBack(item, i, arr){}, context); // Тоже самое что и arr.find(), только возвращает все элементы для которых возвращается true
 arr.map(callBack(item, i, arr){}, context);
