@@ -246,27 +246,27 @@ elem.insertAdjacentElement('where', elem2);	// where:
 											"afterend" – вставить html непосредственно после elem.
 elem.appendChild(elem);
 elem.removeChild(elem2);
-elem.remove(); // remove elem
+elem.remove(); 		// remove elem
 elem.replaceChild(oldElem, newElem); // remove oldElem and return it
 elem.insertBefore(elem2, nextSibling);
-elem.offsetParent; // Элемент родитель относительно которого по css идет позиционирование.
-elem.offsetTop; // относительно offsetParent
-elem.offsetLeft;
-elem.offsetHeight;
-elem.offsetWidth;
-elem.scrollHeight;
-elem.scrollWidth;
-elem.scrollTop;
-elem.scrollLeft;
-elem.clientWidth; // используя document.documentElement выведет только видимую область окна браузера без прокрутки. Они включают в себя ширину области содержимого вместе с внутренними отступами padding, но без прокрутки
-elem.clientHeight; // Они включают в себя ширину области содержимого вместе с внутренними отступами padding, но без прокрутки
-elem.clientTop;
-elem.clientLeft;
+elem.offsetParent; 	// Элемент родитель относительно которого по css идет позиционирование.
+elem.offsetTop; 	// относительно offsetParent
+elem.offsetLeft;	// относительно offsetParent 
+elem.offsetHeight;  // внешняя высота блока, её можно получить сложением CSS-высоты, внутренних отступов и рамок.
+elem.offsetWidth;	// внешняя ширина блока, её можно получить сложением CSS-ширины, внутренних отступов и рамок.
+elem.scrollHeight; 	// полная внутренняя высота (сам контент), включая прокрученную область.
+elem.scrollWidth; 	// полная внутренняя ширина (сам контент), включая прокрученную область.
+elem.scrollTop;		// скрытый непрокрученный контент вверху
+elem.scrollLeft;	// скрытый непрокрученный контент слево
+elem.clientWidth; 	// используя document.documentElement выведет только видимую область окна браузера без прокрутки. Они включают в себя ширину области содержимого вместе с внутренними отступами padding, но без прокрутки
+elem.clientHeight; 	// Они включают в себя ширину области содержимого вместе с внутренними отступами padding, но без прокрутки
+elem.clientTop;  	// ширина верхней рамки
+elem.clientLeft; 	// ширина левой рамки
 elem.innerHTML;
 elem.outerHTML;
-window.innerWidth; // выведет только видемую  область окна браузера + прокрутка
+window.innerWidth; 	// выведет только видемую  область окна браузера + прокрутка
 window.innerHeight;
-window.screenY; // верхний и левый угол браузера относительно всего экрана
+window.screenY; 	// верхний и левый угол браузера относительно всего экрана
 window.screenX;
 window.pageYOffset; // Сколько прокрутки осталось для окна браузера
 window.pageXOffset; // Сколько прокрутки осталось для окна браузера
@@ -299,13 +299,13 @@ elem.classList.add('className');
 elem.classList.remove('className');
 elem.classList.toggle('className');
 elem.classList.contains('className');
-elem.nodeName; // return node's name; Теги всегда выводятся заглавными буквами
-elem.nodeType; // return 1(element), 3(textNode);
-elem.tagName; // return element's name; Теги всегда выводятся заглавными буквами
-elem.nodeValue;
-elem.data;
+elem.nodeName; 	// return node's name; Теги всегда выводятся заглавными буквами
+elem.nodeType; 	// return 1(element), 3(textNode);
+elem.tagName; 	// return element's name; Теги всегда выводятся заглавными буквами
+elem.nodeValue; // У других типов узлов, в частности, у текстовых, есть свои аналоги: свойства nodeValue и data.
+elem.data; 		// У других типов узлов, в частности, у текстовых, есть свои аналоги: свойства nodeValue и data.
 elem.textContent;
-elem.isHidden; // вернёт true для элементов, которые в принципе показываются, но их размеры равны нулю (например, пустые <div>).
+elem.isHidden; 	// вернёт true для элементов, которые в принципе показываются, но их размеры равны нулю (например, пустые <div>).
 //elem == id from HTML
 elem.addEventListener('event', handler[, obj]); // obj = {capture: true/false, once: true/false, passive: true/false, passive: true/false}.  Вместо obj можно использовать true/false как короткая запись {capture: true/false}
 												// once: если true, тогда обработчик будет автоматически удалён после выполнения.
