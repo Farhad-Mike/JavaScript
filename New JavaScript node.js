@@ -391,12 +391,7 @@ let user = User.createGuest();
 alert(user.firstName); // Гость
 
 var anonimFunc = (a, b, c) => a + b + c; // function(a, b, c){return a + b + c};
-elem.onchange;
-elem.oninput;
-elem.oncopy;
-elem.onpaste;
-elem.oncut;
-elem.onsubmit;
+
 form.submit(); // При этом событие submit не генерируется.
 navigator.sendBeacon(url, data) // Он посылает данные в фоне. Переход к другой странице не задерживается: браузер покидает страницу, но всё равно выполняет sendBeacon. Размер данных ограничен 64 Кб.
 input.defaultChecked;
