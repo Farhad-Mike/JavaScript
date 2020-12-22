@@ -143,7 +143,7 @@ typeof "foo" // "string"
 typeof {} // "object"
 typeof null // "object" (1)
 typeof function () { } // "function" (2)
-perfomance.now(); // how much milliseconds has been left from browser send request to erver for open page
+perfomance.now(); // how much milliseconds has been left from browser send request to server for open page
 console.time('name');
 console.timeEnd('name');
 var date = new Date();
